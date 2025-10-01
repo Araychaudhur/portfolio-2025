@@ -6,9 +6,9 @@ export async function generateStaticParams() {
   return caseStudies.map((study) => ({ slug: study.slug }));
 }
 
-// This is the correct pattern: an async Server Component directly rendering the RSC-compatible MDXRemote.
-export default async function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content } = getCaseStudyBySlug(params.slug);
+export default async function CaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { frontmatter, content } = getCaseStudyBySlug(slug);
 
   return (
     <article>

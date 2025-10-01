@@ -1,6 +1,9 @@
-# Allow all user agents to crawl the site
+# *
 User-agent: *
 Allow: /
 
-# Point to the sitemap
+# Host
+Host: https://www.yourdomain.com
+
+# Sitemaps
 Sitemap: https://www.yourdomain.com/sitemap.xml
