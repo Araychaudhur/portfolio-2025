@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import "./globals.css";
+import "../globals.css"; // Corrected path
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.yourdomain.com"), // Replace with your actual domain
+  metadataBase: new URL("https://www.yourdomain.com"),
   title: {
     default: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
     template: "%s | Apoorva Ray Chaudhuri",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
     description: "Senior AI Engineer specializing in building and scaling reliable, cost-effective Generative AI systems.",
-    url: "https://www.yourdomain.com", // Replace with your actual domain
+    url: "https://www.yourdomain.com",
     siteName: "Apoorva Ray Chaudhuri",
     locale: "en_US",
     type: "website",
