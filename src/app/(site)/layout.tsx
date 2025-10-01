@@ -6,8 +6,20 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
-  description: "Portfolio of Apoorva Ray Chaudhuri",
+  metadataBase: new URL("https://www.yourdomain.com"), // Replace with your actual domain
+  title: {
+    default: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
+    template: "%s | Apoorva Ray Chaudhuri",
+  },
+  description: "Senior AI Engineer specializing in building and scaling reliable, cost-effective Generative AI systems.",
+  openGraph: {
+    title: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
+    description: "Senior AI Engineer specializing in building and scaling reliable, cost-effective Generative AI systems.",
+    url: "https://www.yourdomain.com", // Replace with your actual domain
+    siteName: "Apoorva Ray Chaudhuri",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
