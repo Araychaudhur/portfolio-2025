@@ -63,8 +63,8 @@ export function ProfileFlow() {
       if (h.startsWith("ai-") || h.startsWith("sde-")) {
         const [t, sid] = h.split("-", 2) as ["ai" | "sde", string];
         setTrack(t);
-        const arr = t === "ai" ? a.steps : b.steps;
-        const idx = arr.findIndex(s => s.id === sid);
+        const arr = (t === "ai" ? a.steps : b.steps) as Array<{ id: string }>;
+        const idx = arr.findIndex((s) => s.id === sid);
         if (idx >= 0) setI(idx);
       }
     };

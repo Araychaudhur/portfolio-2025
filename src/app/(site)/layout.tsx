@@ -5,10 +5,10 @@ import CtaTracker from "@/components/CtaTracker";
 import dynamic from "next/dynamic";
 
 // Load the floating Q&A launcher as a pure client island to avoid SSR mismatches.
-const RagSheet = dynamic(
-  () => import("@/components/RagSheet").then((m) => m.RagSheet ?? m.default),
-  { ssr: false, loading: () => null }
-);
+const RagSheet = dynamic(async () => {
+  const mod = await import("@/components/RagSheet");
+  return (mod as any).RagSheet ?? (mod as any).default ?? (() => null);
+}, { ssr: false, loading: () => null });
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
