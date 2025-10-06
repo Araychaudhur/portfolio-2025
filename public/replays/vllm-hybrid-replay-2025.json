@@ -1,0 +1,13 @@
+{
+  "slug": "cost-latency-vllm",
+  "title": "Cost vs quality — why vLLM won",
+  "summary": "We tuned caching and rerank to hold quality while cutting spend.",
+  "steps": [
+    { "id": "context", "label": "Context", "body": "Costs drifted up; latency tail had spikes." },
+    { "id": "design", "label": "What I changed", "body": "Mixed provider; vLLM for cached, rerank tuned; prompt de-dupe." },
+    { "id": "results", "label": "Results", "body": "−35% spend, p95 < 1s (cached)", "metrics": [
+      { "name": "GenAI spend", "before": 1.0, "after": 0.65, "unit": "x" },
+      { "name": "p95 cached", "before": 1.6, "after": 0.95, "unit": "s" }
+    ] }
+  ]
+}

@@ -1,0 +1,28 @@
+---
+slug: eval-harness
+title: "Release with confidence: +0.08 in ranking quality, +15-point exact-match lift"
+subtitle: CI gates that ship only when quality rises.
+domain: AI
+outcomes: ["Quality","Velocity"]
+stack: ["Eval","CI","Playwright"]
+impactScore: 76
+heroStats:
+  - { label: "Ranking quality (NDCG)", value: "+0.08" }
+  - { label: "Exact match (EM)", value: "+15 points" }
+  - { label: "Ship risk", value: "Lower" }
+slo:
+  metrics:
+    - { label: "CI pass rate",        now: 98, target: 99.5, direction: "max" }
+    - { label: "Regression escapes",  now: 0,  target: 0,    direction: "min" }
+tldr:
+  - Offline and live evals
+  - Clear thresholds and dashboards
+  - Changes ship when quality improves
+caption: "Safer changes; faster iteration."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+## Notes
+Precomputed eval set with CI gates; dashboards showed EM/NDCG deltas by change.

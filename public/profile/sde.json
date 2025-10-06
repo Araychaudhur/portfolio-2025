@@ -1,0 +1,41 @@
+{
+  "track": "sde",
+  "title": "Platform focus",
+  "subtitle": "Deploys • Observability • APIs",
+  "summary": "Make changes safe and the system understandable.",
+  "steps": [
+    {
+      "id": "context",
+      "label": "Context",
+      "body": "Incidents took too long; alerts were noisy; teams lacked a common view across services.",
+      "skills": ["Kubernetes", "GitHub Actions", "Blue/green releases"],
+      "media": []
+    },
+    {
+      "id": "goals",
+      "label": "Goals",
+      "body": "Make issues visible fast, cut alert noise, and agree on what 'good' looks like (SLOs).",
+      "skills": ["SLOs & SLIs", "Runbooks", "Dashboards"],
+      "media": []
+    },
+    {
+      "id": "design",
+      "label": "What I changed",
+      "body": "OpenTelemetry everywhere; Prometheus + Grafana; SLOs with clear runbooks; better release hygiene.",
+      "skills": ["OpenTelemetry", "Prometheus", "Grafana", "Fast rollbacks"],
+      "media": []
+    },
+    {
+      "id": "results",
+      "label": "Results",
+      "body": "p95 latency dropped; alert noise halved; MTTR improved while traffic grew.",
+      "skills": ["Incident review", "Alert tuning"],
+      "metrics": [
+        { "name": "p95 latency", "before": 420, "after": 270, "unit": "ms" },
+        { "name": "Alert noise", "before": 100, "after": 50, "unit": "%" },
+        { "name": "MTTR", "before": 1.0, "after": 0.55, "unit": "x" }
+      ],
+      "media": []
+    }
+  ]
+}

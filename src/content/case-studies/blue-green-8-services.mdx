@@ -1,0 +1,29 @@
+---
+slug: blue-green-8-services
+title: Blue/green across 8 services cut failures 40%; rollbacks take under 2 minutes
+subtitle: Health-gated rollouts with traffic shift and one-click rollbacks.
+domain: Platform
+outcomes: ["Reliability","Velocity"]
+stack: ["Blue/Green","Gate","Rollback"]
+impactScore: 82
+hasReplay: true
+replaySrc: /replays/bluegreen-replay-2025.json
+replayDurationSec: 90
+heroStats:
+  - { label: "Deploy failures", value: "40% reduction" }
+  - { label: "Rollback time", value: "under 2 min" }
+slo:
+  metrics:
+    - { label: "Rollback time (min)", now: 2, target: 10, direction: "min" }
+    - { label: "Change fail rate",    now: 2, target: 5,  direction: "min" }
+tldr:
+  - Gates and gradual traffic shift
+  - One-click rollback
+  - Safer deploy habits
+caption: "Rolled out service by service."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+Safer deploys and faster rollback culture.

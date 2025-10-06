@@ -1,0 +1,45 @@
+---
+slug: rag-at-scale
+title: RAG at scale  grounded answers with citations
+subtitle: "DocQA that feels native: relevant answers with anchored sources, fast tail latency, and controlled costs."
+domain: AI
+outcomes: ["Latency","Cost","Trust"]
+stack: ["RAG","pgvector","Cross-encoder"]
+impactScore: 90
+hasReplay: true
+replaySrc: /replays/rag-at-scale.json
+replayDurationSec: 90
+heroStats:
+  - { label: "Answer latency (p99, cached)", value: "= 1.0 s" }
+  - { label: "GenAI cost", value: "-35%" }
+  - { label: "Daily queries", value: "35k+" }
+  - { label: "Trust", value: "Cited answers" }
+percentiles:
+  p50: 220
+  p95: 990
+waterfall:
+  - { label: "Retrieval", ms: 200 }
+  - { label: "Rerank", ms: 150 }
+  - { label: "Generation (cached)", ms: 300 }
+slo:
+  metrics:
+    - { label: "Grounded answers rate", now: 92, target: 95, direction: "max" }
+    - { label: "Error rate",            now: 0.4, target: 1.0, direction: "min" }
+tldr:
+  - Grounded Q and A with anchored citations
+  - Rerank and caching for native-feel latency tail
+  - Spend down without losing trust
+caption: "Built with production traffic."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+## Context
+Docs were scattered; people guessed where to look. We needed direct answers, grounded and traceable.
+
+## What changed
+Embedding index with pgvector, cross-encoder rerank, prompt shape, and a caching layer. Anchored citations matched to sections.
+
+## Results
+Trust went up because answers link to sources; p99 stayed under a second for cached flows; spend dropped with vLLM on the hot path.

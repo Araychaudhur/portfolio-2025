@@ -1,0 +1,36 @@
+{
+  "slug": "rag-at-scale",
+  "title": "RAG at scale — what changed and why it worked",
+  "summary": "Grounded answers with citations, fast tail, and cost controls.",
+  "steps": [
+    {
+      "id": "context",
+      "label": "Context",
+      "body": "Docs were scattered; users guessed where to look. We needed direct answers, grounded and traceable.",
+      "media": []
+    },
+    {
+      "id": "design",
+      "label": "What I changed",
+      "body": "Built an embedding index (pgvector), added cross-encoder rerank, and returned highlighted citations. Standardized chunking and metadata (source, section, anchor).",
+      "media": []
+    },
+    {
+      "id": "quality",
+      "label": "Quality",
+      "body": "Evals in CI caught regressions. Tuned reranking, prompt shape, and caching until it felt native.",
+      "media": []
+    },
+    {
+      "id": "results",
+      "label": "Results",
+      "body": "Search felt native; answers linked to sources; teams trusted the output.",
+      "metrics": [
+        { "name": "Daily queries", "before": 0, "after": 35000, "unit": "/day" },
+        { "name": "Answer latency (p99)", "before": 2.5, "after": 0.99, "unit": "s" },
+        { "name": "GenAI cost", "before": 1.0, "after": 0.65, "unit": "x" }
+      ],
+      "media": []
+    }
+  ]
+}

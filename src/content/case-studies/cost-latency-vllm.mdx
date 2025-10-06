@@ -1,0 +1,37 @@
+---
+slug: cost-latency-vllm
+title: 35% less cost with sub-second replies for 95% of requests
+subtitle: Mixed provider with vLLM on the hot path; rerank + caching held quality while cutting cost.
+domain: AI
+outcomes: ["Cost","Latency","Quality"]
+stack: ["vLLM","Cache","Rerank"]
+impactScore: 84
+hasReplay: true
+replaySrc: /replays/vllm-hybrid-replay-2025.json
+replayDurationSec: 90
+heroStats:
+  - { label: "GenAI cost", value: "reduced by 35%" }
+  - { label: "p95 (cached)", value: "< 1.0 s" }
+  - { label: "Quality", value: "Held steady" }
+frontier:
+  - { label: "OpenAI raw", cost: 1.0, quality: 1.0 }
+  - { label: "vLLM tuned", cost: 0.65, quality: 0.95, current: true }
+percentiles:
+  p50: 220
+  p95: 950
+slo:
+  metrics:
+    - { label: "Cache hit rate",         now: 65, target: 80, direction: "max" }
+    - { label: "Cost per query (rel.)",  now: 0.65, target: 1.0, direction: "min" }
+tldr:
+  - Hybrid serving with caching
+  - Rerank tuned for quality
+  - Spend down with steady UX
+caption: "After 4 changes over 3 weeks."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+## Notes
+We moved cached paths to vLLM, kept rerank quality, and removed duplicate prompts.

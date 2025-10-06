@@ -1,0 +1,28 @@
+---
+slug: safety-privacy
+title: Zero PII incidents with least-privilege by default
+subtitle: Guardrails, redaction, and scoped keys made safety boring (in the best way).
+domain: AI
+outcomes: ["Safety","Trust"]
+stack: ["PII","Scopes","Redaction"]
+impactScore: 74
+heroStats:
+  - { label: "Incidents", value: "0" }
+  - { label: "Scopes", value: "Least-privilege" }
+  - { label: "Audit", value: "Clean" }
+slo:
+  metrics:
+    - { label: "PII recall",         now: 92, target: 97, direction: "max" }
+    - { label: "Refusal precision",  now: 90, target: 95, direction: "max" }
+tldr:
+  - Redaction on ingest and egress
+  - Scoped keys with rotating secrets
+  - Safe logging defaults
+caption: "Ongoing hardening."
+cloud:
+  - AWS
+---
+
+
+## Notes
+Instrumented sinks; logs avoided free-text; playbooks for escalations.

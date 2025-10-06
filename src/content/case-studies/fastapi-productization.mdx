@@ -1,0 +1,30 @@
+---
+slug: fastapi-productization
+title: 60 rps at 95th percentile 400 to 250 ms  no lost updates
+subtitle: Clean API shapes and DB hygiene made the service boring (in a good way).
+domain: Platform
+outcomes: ["Latency","Reliability","DX"]
+stack: ["FastAPI","Postgres","Cache"]
+impactScore: 68
+heroStats:
+  - { label: "Throughput", value: "60 rps" }
+  - { label: "HTTP p95 (95th)", value: "400 to 250 ms" }
+  - { label: "Lost updates", value: "0" }
+percentiles:
+  p50: 160
+  p95: 250
+tldr:
+  - Optimistic concurrency
+  - Cursor pagination
+  - Observability first
+caption: "Two sprints to stable."
+slo:
+  metrics:
+    - { label: "p99 latency", now: 800, target: 900, mode: "raw", unit: "ms", direction: "min" }
+    - { label: "Throughput",  now: 120, target: 150, mode: "raw", unit: "req/s", direction: "max" }
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+Then/Now architecture and DB constraints.

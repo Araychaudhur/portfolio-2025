@@ -1,0 +1,28 @@
+---
+slug: orchestration-langgraph
+title: Orchestration overhead p95 (95th percentile) 0.20 to 0.095 s
+subtitle: Lean LangGraph flow with fewer hops and better caching.
+domain: AI
+outcomes: ["Latency","Reliability"]
+stack: ["LangGraph","Cache"]
+impactScore: 72
+heroStats:
+  - { label: "Overhead p95 (95th percentile)", value: "0.20 to 0.095 s" }
+  - { label: "Hops", value: "-40%" }
+percentiles:
+  p50: 70
+  p95: 95
+slo:
+  metrics:
+    - { label: "Pipeline success rate", now: 98, target: 99.5, direction: "max" }
+    - { label: "Job cycle time (s)",    now: 14, target: 20,   direction: "min" }
+tldr:
+  - Fewer nodes; less IO
+  - Memoized hot edges
+  - Clear timeouts and retries
+caption: "After 3 PRs."
+cloud:
+  - AWS
+---
+
+Flow trimmed to essentials; errors isolated per node.

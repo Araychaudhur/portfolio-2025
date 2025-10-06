@@ -1,0 +1,13 @@
+{
+  "slug": "blue-green-8-services",
+  "title": "Blue/Green across 8 services",
+  "summary": "Boring rollouts with quick rollbacks, lower failure rates.",
+  "steps": [
+    { "id": "context", "label": "Context", "body": "Deploys were noisy and risky; rollbacks were slow." },
+    { "id": "design", "label": "What I changed", "body": "Blue/Green with health gates, traffic shift, and one-click rollback." },
+    { "id": "results", "label": "Results", "body": "Failures −40%, rollback ≤ 2 min", "metrics": [
+      { "name": "Deploy failures", "before": 100, "after": 60, "unit": "%" },
+      { "name": "Rollback time", "before": 10, "after": 2, "unit": "min" }
+    ] }
+  ]
+}

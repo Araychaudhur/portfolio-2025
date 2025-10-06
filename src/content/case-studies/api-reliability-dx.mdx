@@ -1,0 +1,31 @@
+---
+slug: api-reliability-dx
+title: "Boring (in the best way): stable contracts and SDKs"
+subtitle: Developer experience focused on clarity and correct defaults.
+domain: Platform
+outcomes:
+  - DX
+  - Reliability
+stack:
+  - SDK
+  - Docs
+  - Contracts
+impactScore: 60
+heroStats:
+  - { label: "Breaking changes", value: "0 since v2" }
+  - { label: "SDK coverage", value: "100%" }
+slo:
+  metrics:
+    - { label: "PII recall", now: 92, target: 97, direction: "max" }
+    - { label: "Refusal precision", now: 90, target: 95, direction: "max" }
+tldr:
+  - Clear API shapes and stable defaults
+  - SDKs first; docs that prevent mistakes
+  - Safer migrations with deprecation windows
+caption: "Developers ship faster when APIs are predictable."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+Contracts, tests, examples, and change rules.

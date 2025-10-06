@@ -1,53 +1,55 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from "next/link";
-import "../globals.css"; // Corrected path
+// src/app/(site)/layout.tsx
+import "./globals.css";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import CtaTracker from "@/components/CtaTracker";
+import dynamic from "next/dynamic";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+// Load the floating Q&A launcher as a pure client island to avoid SSR mismatches.
+const RagSheet = dynamic(
+  () => import("@/components/RagSheet").then((m) => m.RagSheet ?? m.default),
+  { ssr: false, loading: () => null }
+);
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.yourdomain.com"),
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
+
+export const metadata = {
   title: {
-    default: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
-    template: "%s | Apoorva Ray Chaudhuri",
+    default: "Apoorva Ray Chaudhuri",
+    template: "%s — Apoorva Ray Chaudhuri",
   },
-  description: "Senior AI Engineer specializing in building and scaling reliable, cost-effective Generative AI systems.",
-  openGraph: {
-    title: "Apoorva Ray Chaudhuri | AI & Platform Engineer",
-    description: "Senior AI Engineer specializing in building and scaling reliable, cost-effective Generative AI systems.",
-    url: "https://www.yourdomain.com",
-    siteName: "Apoorva Ray Chaudhuri",
-    locale: "en_US",
-    type: "website",
-  },
+  description:
+    "Proof, not promises. Case studies with interactive walkthroughs and a Q&A bot that cites this site.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <header className="container mx-auto max-w-4xl px-4 py-6">
-          <nav>
-            <ul className="flex items-center gap-x-6 text-sm font-medium text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground">Home</Link>
-              </li>
-              <li>
-                <Link href="/case-studies" className="hover:text-foreground">Case Studies</Link>
-              </li>
-              <li>
-                <Link href="/how-i-work" className="hover:text-foreground">How I Work</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main className="container mx-auto max-w-4xl px-4 py-10">
-          {children}
-        </main>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
+      <body className="min-h-dvh bg-background text-foreground font-sans antialiased">
+        {/* Soft vignette / tints */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(1200px 800px at -20% -20%, hsl(var(--brand)/.18), transparent 55%), radial-gradient(900px 600px at 120% 10%, hsl(var(--brand2)/.18), transparent 55%)",
+          }}
+        />
+        {/* Optional grid (safe if not defined) */}
+        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-grid" />
+
+        {children}
+
+        {/* Global CTA analytics */}
+        <CtaTracker />
+
+        {/* Floating Q&A launcher */}
+        <div className="fixed right-5 bottom-5 z-50">
+          <RagSheet />
+        </div>
+
+        {/* Anchor used by “Ask a question” links */}
+        <div id="ask" className="sr-only" />
       </body>
     </html>
   );

@@ -1,0 +1,25 @@
+---
+slug: onnx-efficiency
+title: CPU p99 1.6 to 0.95 s with ONNX
+subtitle: Lighter models, quantization, and batching made inference affordable.
+domain: AI
+outcomes: ["Latency","Cost"]
+stack: ["ONNX","Quant","Batching"]
+impactScore: 66
+heroStats:
+  - { label: "CPU p99", value: "1.6 to 0.95 s" }
+  - { label: "Spend", value: "Lower" }
+  - { label: "Quality", value: "Held steady" }
+percentiles:
+  p50: 280
+  p95: 900
+tldr:
+  - Optimize where it counts
+  - Use the right batch size
+  - Keep answers grounded
+caption: "Tuned with real traffic."
+cloud:
+  - AWS
+---
+
+Swapped kernels, validated drift, rolled out behind flags.

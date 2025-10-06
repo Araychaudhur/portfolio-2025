@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Design tokens (light/dark) ===== */
+:root {
+  --bg: 0 0% 100%;
+  --fg: 222 47% 11%;
+  --muted: 215 16% 47%;
+  --card: 0 0% 100%;
+  --ring: 220 90% 56%;
+  --brand: 258 92% 62%;
+  --brand2: 198 94% 60%;
+  --brandA: rgba(110, 87, 255, 0.35);
+}
+.dark {
+  --bg: 222 47% 4%;
+  --fg: 210 40% 96%;
+  --muted: 217 19% 70%;
+  --card: 222 47% 6%;
+  --ring: 215 90% 65%;
+  --brand: 258 92% 70%;
+  --brand2: 198 94% 72%;
+  --brandA: rgba(110, 87, 255, 0.45);
+}
+
+/* ===== Base ===== */
+* { @apply antialiased; }
+html, body { height: 100%; }
+body {
+  @apply bg-bg text-fg selection:bg-brand/20 selection:text-fg;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, hsl(var(--brand) / .15), transparent 40%),
+    radial-gradient(900px 600px at -10% 20%, hsl(var(--brand2) / .18), transparent 45%),
+    linear-gradient(180deg, hsl(var(--bg)) 0%, hsl(var(--bg)) 100%);
+}
+
+/* Subtle grid overlay, toggles with dark mode */
+.bg-grid {
+  background-image: var(--grid-img);
+  background-size: var(--grid-size);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 70%);
+}
+:root { --grid-img: theme('backgroundImage.grid-light'); --grid-size: theme('backgroundSize.grid'); }
+.dark { --grid-img: theme('backgroundImage.grid-dark'); }
+
+/* Card + glass styles */
+.card {
+  @apply rounded-3xl p-6 bg-card/70 backdrop-blur border border-black/5 dark:border-white/10 shadow-soft;
+}
+.glass {
+  @apply bg-card/60 backdrop-blur-md border border-black/5 dark:border-white/10;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(90deg, hsl(var(--brand)) 0%, hsl(var(--brand2)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Fancy button */
+.btn {
+  @apply inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-medium border;
+  border-color: transparent;
+  background: linear-gradient(90deg, hsl(var(--brand)) 0%, hsl(var(--brand2)) 100%);
+  color: white;
+  box-shadow: 0 8px 20px var(--brandA);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px var(--brandA); }
+.btn:active { transform: translateY(0); }
+
+/* Outline button */
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-medium border;
+  background: linear-gradient(white, white) padding-box,
+              linear-gradient(90deg, hsl(var(--brand)) 0%, hsl(var(--brand2)) 100%) border-box;
+  color: hsl(var(--fg));
+}
+.dark .btn-outline {
+  background: linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+              linear-gradient(90deg, hsl(var(--brand)) 0%, hsl(var(--brand2)) 100%) border-box;
+  color: hsl(var(--fg));
+}
+
+/* Shimmer utility */
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+  background-size: 200% 100%;
+  animation: shine 2.5s linear infinite;
+}
+
+/* Minimal scrollbar */
+* { scrollbar-width: thin; scrollbar-color: hsl(var(--brand)) transparent; }
+*::-webkit-scrollbar { height: 10px; width: 10px; }
+*::-webkit-scrollbar-thumb { background: hsl(var(--brand)/.6); border-radius: 999px; }

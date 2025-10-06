@@ -1,0 +1,40 @@
+{
+  "track": "ai",
+  "title": "AI focus",
+  "subtitle": "Search + Q&A • Quality • Safety",
+  "summary": "Shipping useful AI features that are predictable, measured, and kind to users.",
+  "steps": [
+    {
+      "id": "context",
+      "label": "Context",
+      "body": "Users needed answers from docs without guessing where to look. We had to be fast, grounded, and safe.",
+      "skills": ["LangGraph", "OpenAI API", "Supabase pgvector", "FastAPI", "vLLM"],
+      "media": []
+    },
+    {
+      "id": "design",
+      "label": "What I changed",
+      "body": "Doc search + Q&A with embeddings and citations, fallbacks for cost/latency, and light redaction for safety.",
+      "skills": ["Retrieval design", "Prompting", "Caching & KV", "Least privilege", "Guardrails"],
+      "media": []
+    },
+    {
+      "id": "quality",
+      "label": "Quality",
+      "body": "Evals in CI caught regressions. I tuned reranking, prompt shape, and caching until it felt native.",
+      "skills": ["Prompt-evals", "Reranking", "A/B tests", "vLLM + OpenAI fallback"],
+      "media": []
+    },
+    {
+      "id": "results",
+      "label": "Results",
+      "body": "Grounded answers with citations; sub-second p99 on cached hits; costs down ~35%.",
+      "skills": ["SLOs", "Dashboards", "Playbooks"],
+      "metrics": [
+        { "name": "p99 on cached hits", "before": 1.4, "after": 0.9, "unit": "s" },
+        { "name": "GenAI costs", "before": 1.0, "after": 0.65, "unit": "x" }
+      ],
+      "media": []
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+---
+slug: observability-program
+title: Observability  faster fixes, quieter alerts
+subtitle: OpenTelemetry + Prom/Grafana + SLOs with clear runbooks. Safer deploys and faster incident response.
+domain: Platform
+outcomes:
+  - Latency
+  - Noise
+  - MTTR
+stack:
+  - OpenTelemetry
+  - Prometheus
+  - Grafana
+impactScore: 85
+hasReplay: false
+heroStats:
+  - { label: "HTTP p95 (95th)", value: "420 to 270 ms" }
+  - { label: "Alert noise", value: "-50%" }
+  - { label: "MTTR", value: "1.0 to 0.55" }
+  - { label: "Traffic", value: "+25% QoQ" }
+percentiles:
+  p50: 180
+  p95: 700
+waterfall:
+  - { label: "Ingress", ms: 45 }
+  - { label: "Service", ms: 180 }
+  - { label: "Cache", ms: 85 }
+  - { label: "DB", ms: 95 }
+  - { label: "Downstream", ms: 30 }
+slo:
+  metrics:
+    - { label: "Availability", now: 99.92, target: 99.99, direction: "max" }
+    - { label: "Error rate",  now: 0.4,   target: 1.0,   direction: "min" }
+tldr:
+  - OpenTelemetry everywhere
+  - SLOs and clear dashboards
+  - Runbooks and health-gated deploys
+caption: "After 5 changes over 4 weeks."
+cloud:
+  - AWS
+  - Kubernetes
+---
+
+
+## Context
+Incidents took too long; alerts were noisy; teams lacked a shared view.
+
+## What changed
+OpenTelemetry everywhere, SLOs, dashboards, and runbooks. Health-gated deploys.
+
+## Results
+p95 (95th percentile) latency and MTTR improved while traffic grew; alert noise dropped approximately 50%.

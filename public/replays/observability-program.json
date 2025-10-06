@@ -1,0 +1,37 @@
+{
+  "slug": "observability-program",
+  "title": "Observability — What changed and why it mattered",
+  "summary": "Standardized traces/metrics and cleaned up alerts so fixing things got faster and alerts got quieter.",
+  "steps": [
+    {
+      "id": "context",
+      "label": "Context",
+      "body": "Incidents took too long; alerts were noisy; teams lacked a common view across services.",
+      "media": []
+    },
+    {
+      "id": "goals",
+      "label": "Goals",
+      "body": "Make issues visible fast, cut alert noise, and agree on what 'good' looks like (SLOs).",
+      "media": []
+    },
+    {
+      "id": "design",
+      "label": "What I changed",
+      "body": "OpenTelemetry everywhere; Prometheus + Grafana dashboards; SLOs with clear runbooks; deploy hygiene.",
+      "media": []
+    },
+    {
+      "id": "results",
+      "label": "Results",
+      "body": "p95 latency dropped; alert noise halved; MTTR improved while traffic still grew.",
+      "metrics": [
+        { "name": "p95 latency", "before": 420, "after": 270, "unit": "ms" },
+        { "name": "Alert noise", "before": 100, "after": 50, "unit": "%" },
+        { "name": "MTTR", "before": 1.0, "after": 0.55, "unit": "x" },
+        { "name": "Traffic growth", "before": 0, "after": 25, "unit": "% QoQ" }
+      ],
+      "media": []
+    }
+  ]
+}
