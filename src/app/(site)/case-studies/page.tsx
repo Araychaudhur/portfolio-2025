@@ -2,11 +2,35 @@
 import { Suspense } from "react";
 import { getAllCaseMeta } from "@/lib/cases";
 import CaseGrid from "@/components/CaseGrid";
+import type { Metadata } from "next";
 
-export const metadata = {
-  title: "Case Studies",
-  description: "Selected work with clear outcomes and proofs",
-};
+export async function generateMetadata(
+  { searchParams }: { searchParams?: Record<string, string | string[] | undefined> }
+): Promise<Metadata> {
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+    process.env.SITE_URL?.replace(/\/+$/, "") ||
+    "http://localhost:3000";
+
+  const canonical = `${base}/case-studies`;
+
+  const isSet = (v: unknown) => {
+    if (Array.isArray(v)) return v.length > 0 && String(v[0]).toLowerCase() !== "all";
+    if (typeof v === "string") return v.length > 0 && v.toLowerCase() !== "all";
+    return false;
+  };
+
+  const hasFilters = ["o", "stack", "cloud", "domain", "sort"].some((k) =>
+    isSet(searchParams?.[k])
+  );
+
+  return {
+    title: "Case Studies",
+    description: "Selected work with clear outcomes and proofs",
+    alternates: { canonical },
+    robots: { index: !hasFilters, follow: true },
+  };
+}
 
 export default async function CaseStudiesPage() {
   const items = await getAllCaseMeta();

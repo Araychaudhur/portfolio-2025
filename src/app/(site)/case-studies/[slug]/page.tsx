@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import { MDXRemote } from "next-mdx-remote/rsc";
-
+import type { Metadata } from "next";
 import { getAllCaseSlugs, getCaseBySlug } from "@/lib/cases";
 import { StatTiles } from "@/components/StatTiles";
 import StickyAside from "@/components/StickyAside";
@@ -16,6 +16,13 @@ import SLOGaugeRow, { type MetricInput } from "@/components/charts/SLOGaugeRow";
 import StackEnvironmentChips from "@/components/case/StackEnvironmentChips";
 import ReplayAuto from "@/components/replay/ReplayAuto";
 
+function ld(obj: unknown) {
+  return { __html: JSON.stringify(obj) };
+}
+function asArray(x: unknown): string[] {
+  return Array.isArray(x) ? x.filter(Boolean) as string[] : [];
+}
+
 // ----------------------------------------------------
 // Static params / metadata
 // ----------------------------------------------------
@@ -24,13 +31,32 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const data = await getCaseBySlug(params.slug).catch(() => null);
-  if (!data) return {};
-  const fm = data.frontmatter as any;
+export async function generateMetadata(
+  { params }: { params: { slug: string } }
+): Promise<Metadata> {
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+    process.env.SITE_URL?.replace(/\/+$/, "") ||
+    "http://localhost:3000";
+
+  const canonical = `${base}/case-studies/${params.slug}`;
+
+  // derive title/description from front-matter for reliable snippets
+  let title = "Case Study";
+  let description: string | undefined;
+  try {
+    const { frontmatter: fm } = await getCaseBySlug(params.slug);
+    title = fm.title || title;
+    description = fm.subtitle || undefined;
+  } catch {
+    // if slug isn't found at build time, keep safe defaults
+  }
+
   return {
-    title: `${fm.title} — Case Study`,
-    description: fm.subtitle ?? undefined,
+    title,
+    description,
+    alternates: { canonical },
+    robots: { index: true, follow: true },
   };
 }
 
@@ -149,11 +175,40 @@ export default async function CasePage({ params }: { params: { slug: string } })
   const frontier = frontierFromFrontmatter(fm);
 
   // Resolve cloud tags from any supported key in frontmatter
-const cloud: string[] =
-  Array.isArray(fm.cloud) ? fm.cloud :
-  Array.isArray(fm.stackCloud) ? fm.stackCloud :
-  Array.isArray(fm.tags?.cloud) ? (fm.tags!.cloud as string[]) :
-  [];
+  const cloud: string[] =
+    Array.isArray(fm.cloud) ? fm.cloud :
+    Array.isArray(fm.stackCloud) ? fm.stackCloud :
+    Array.isArray(fm.tags?.cloud) ? (fm.tags!.cloud as string[]) :
+    [];
+
+  // Build JSON-LD for richer snippets
+  const siteBase =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+    process.env.SITE_URL?.replace(/\/+$/, "") ||
+    "http://localhost:3000";
+
+  const caseUrl = `${siteBase}/case-studies/${fm.slug}`;
+  const keywords = [
+    ...(asArray(fm.outcomes)),
+    ...(asArray(fm.stack)),
+    ...(asArray(cloud)),
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    mainEntityOfPage: caseUrl,
+    headline: fm.title,
+    description: fm.subtitle || undefined,
+    keywords: keywords.length ? keywords.join(", ") : undefined,
+    inLanguage: "en",
+    url: caseUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Apoorva Ray Chaudhuri — Portfolio",
+      url: siteBase,
+    },
+  };
 
   // Legacy fallbacks for charts that still expect older props
   const legacyBuckets = pct ? buildBucketsFrom(pct.p50, pct.p95) : undefined;
@@ -233,6 +288,7 @@ const cloud: string[] =
           <article className="prose prose-invert mt-10 max-w-none">
             <MDXRemote source={data.body} />
           </article>
+          <script type="application/ld+json" dangerouslySetInnerHTML={ld(jsonLd)} />
         </section>
 
         {/* Sticky “TL;DR” aside */}
