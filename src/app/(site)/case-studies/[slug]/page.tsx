@@ -13,6 +13,8 @@ import LatencyDistribution from "@/components/charts/LatencyDistribution";
 import CostQualityFrontier from "@/components/charts/CostQualityFrontier";
 import SLOGaugeRow, { type MetricInput } from "@/components/charts/SLOGaugeRow";
 
+import StackEnvironmentChips from "@/components/case/StackEnvironmentChips";
+
 // Lazy replay player (keeps TBT low while preserving SSR/Suspense)
 const ReplayPlayer = dynamic(
   () => import("@/components/ReplayPlayer").then((m) => m.ReplayPlayer),
@@ -151,6 +153,13 @@ export default async function CasePage({ params }: { params: { slug: string } })
   const steps = waterfallFromFrontmatter(fm);
   const frontier = frontierFromFrontmatter(fm);
 
+  // Resolve cloud tags from any supported key in frontmatter
+const cloud: string[] =
+  Array.isArray(fm.cloud) ? fm.cloud :
+  Array.isArray(fm.stackCloud) ? fm.stackCloud :
+  Array.isArray(fm.tags?.cloud) ? (fm.tags!.cloud as string[]) :
+  [];
+
   // Legacy fallbacks for charts that still expect older props
   const legacyBuckets = pct ? buildBucketsFrom(pct.p50, pct.p95) : undefined;
   const legacyItems = Array.isArray(fm?.waterfall) ? fm.waterfall : undefined;
@@ -173,6 +182,7 @@ export default async function CasePage({ params }: { params: { slug: string } })
               ) : null}
             </div>
           ) : null}
+          <StackEnvironmentChips stack={fm.stack} cloud={cloud} />
 
           {/* Charts (each card renders only when data exists) */}
           <div className="mt-8 grid gap-6 md:grid-cols-2">
