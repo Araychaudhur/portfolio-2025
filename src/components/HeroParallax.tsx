@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import * as React from "react";
 import { useParallax } from "@/hooks/useParallax";
@@ -9,6 +10,14 @@ function ProofChip({ value, label }: { value: string; label: string }) {
       <div className="text-2xl font-semibold leading-none">{value}</div>
       <div className="mt-1 text-sm text-muted">{label}</div>
     </div>
+  );
+}
+
+function ToolChip({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border px-3 py-1 text-xs md:text-sm bg-background/70">
+      {children}
+    </span>
   );
 }
 
@@ -29,18 +38,14 @@ export function HeroParallax() {
         aria-hidden
       />
 
-      <div className="container pt-28 pb-10 md:pt-36 md:pb-12 relative">
+      <div className="container pt-28 pb-12 md:pt-36 md:pb-16 relative">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-semibold leading-tight md:text-6xl">
-            Hi, I’m{" "}
-            <span className="gradient-text inline-block whitespace-nowrap">
-              Apoorva Ray Chaudhuri
-            </span>
-            . I build reliable AI features and backend systems.
+            Make the answers SMART and the systems CALM
           </h1>
 
           <p className="mt-5 text-lg text-muted">
-            Proof, not promises. Browse the case studies or book a quick intro.
+            Grounded GenAI on dependable platforms, measured by p95, EM or NDCG, and dollars.
           </p>
 
           {/* CTAs */}
@@ -58,8 +63,25 @@ export function HeroParallax() {
           <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 md:grid-cols-4">
             <ProofChip value="35k+/day" label="Real queries" />
             <ProofChip value="p95 < 1s" label="Feels native" />
-            <ProofChip value="−35%" label="LLM spend" />
+            <ProofChip value="-35%" label="LLM spend" />
             <ProofChip value="0 PII incidents" label="Safety in prod" />
+          </div>
+
+          {/* Toolbelt row */}
+          <div className="mx-auto mt-8 flex max-w-4xl flex-wrap items-center justify-center gap-2 text-muted">
+            {[
+              "Amazon Web Services",
+              "Elastic Kubernetes Services",
+              "Terraform",
+              "OpenTelemetry → Prometheus/Grafana",
+              "NGINX Ingress",
+              "GitHub Actions",
+              "Redis",
+              "RDS/Postgres",
+              "AWS S3",
+            ].map((t) => (
+              <ToolChip key={t}>{t}</ToolChip>
+            ))}
           </div>
         </div>
       </div>

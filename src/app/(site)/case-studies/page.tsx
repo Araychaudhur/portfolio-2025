@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { getAllCaseMeta } from "@/lib/cases";
 import CaseGrid from "@/components/CaseGrid";
 import type { Metadata } from "next";
-
 export async function generateMetadata(
   { searchParams }: { searchParams?: Record<string, string | string[] | undefined> }
 ): Promise<Metadata> {

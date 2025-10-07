@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import CtaTracker from "@/components/CtaTracker";
 import dynamic from "next/dynamic";
+import IntroGate from "@/components/intro/IntroGate";
 
 // Load the floating Q&A launcher as a pure client island to avoid SSR mismatches.
 const RagSheet = dynamic(async () => {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="min-h-dvh bg-background text-foreground font-sans antialiased">
+        <IntroGate />
         {/* Soft vignette / tints */}
         <div
           aria-hidden

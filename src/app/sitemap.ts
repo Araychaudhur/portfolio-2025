@@ -11,10 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${base}/`, changeFrequency: "weekly",  priority: 1,    lastModified: now },
-    { url: `${base}/case-studies`, changeFrequency: "weekly", priority: 0.9, lastModified: now },
-    { url: `${base}/about`, changeFrequency: "monthly", priority: 0.6, lastModified: now },
-    { url: `${base}/contact`, changeFrequency: "yearly", priority: 0.3, lastModified: now },
+    { url: `${base}/home`,           changeFrequency: "weekly",  priority: 1,   lastModified: now },
+    { url: `${base}/case-studies`,   changeFrequency: "weekly",  priority: 0.9, lastModified: now },
+    { url: `${base}/about`,          changeFrequency: "monthly", priority: 0.6, lastModified: now },
+    { url: `${base}/contact`,        changeFrequency: "yearly",  priority: 0.3, lastModified: now },
+    // Intro is a splash; keep it out of the sitemap on purpose.
   ];
 
   const casePages: MetadataRoute.Sitemap = slugs.map((slug) => ({
