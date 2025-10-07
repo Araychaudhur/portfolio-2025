@@ -14,12 +14,7 @@ import CostQualityFrontier from "@/components/charts/CostQualityFrontier";
 import SLOGaugeRow, { type MetricInput } from "@/components/charts/SLOGaugeRow";
 
 import StackEnvironmentChips from "@/components/case/StackEnvironmentChips";
-
-// Lazy replay player (keeps TBT low while preserving SSR/Suspense)
-const ReplayPlayer = dynamic(
-  () => import("@/components/ReplayPlayer").then((m) => m.ReplayPlayer),
-  { ssr: true, suspense: true }
-);
+import ReplayAuto from "@/components/replay/ReplayAuto";
 
 // ----------------------------------------------------
 // Static params / metadata
@@ -230,7 +225,7 @@ const cloud: string[] =
           {fm.hasReplay && fm.replaySrc ? (
             <div className="mt-8" id="replay">
               {/* @ts-expect-error Async Server Component + Suspense boundary */}
-              <ReplayPlayer src={fm.replaySrc} fallback={<ReplaySkeleton />} />
+              <ReplayAuto src={fm.replaySrc} fallback={<ReplaySkeleton />} />
             </div>
           ) : null}
 
