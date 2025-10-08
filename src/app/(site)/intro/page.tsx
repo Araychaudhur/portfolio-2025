@@ -12,10 +12,10 @@ function Lines() {
   return (
     <TypeSequence
       lines={[
-        "Hey",
+        "Hey!",
         "I’m Apoorva Ray Chaudhuri",
         "I build AI that answers and platforms that don’t panic",
-        "Let’s get started",
+        "Start the tour",
       ]}
     />
   );

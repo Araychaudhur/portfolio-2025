@@ -41,11 +41,11 @@ export function HeroParallax() {
       <div className="container pt-28 pb-12 md:pt-36 md:pb-16 relative">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-semibold leading-tight md:text-6xl">
-            Make the answers SMART and the systems CALM
+            I Make the answers SMART and the systems CALM
           </h1>
 
           <p className="mt-5 text-lg text-muted">
-            Grounded GenAI on dependable platforms, measured by p95, EM or NDCG, and dollars.
+            Reliable AI that's fast, accurate, and great for your bottom line
           </p>
 
           {/* CTAs */}

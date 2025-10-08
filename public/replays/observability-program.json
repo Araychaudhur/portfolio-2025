@@ -6,29 +6,29 @@
     {
       "id": "context",
       "label": "Context",
-      "body": "Incidents took too long; alerts were noisy; teams lacked a common view across services.",
+      "body": "Incidents took too long to resolve. The alerts were noisy and overwhelming. On top of that, teams lacked a common view across their services.",
       "media": []
     },
     {
       "id": "goals",
       "label": "Goals",
-      "body": "Make issues visible fast, cut alert noise, and agree on what 'good' looks like (SLOs).",
+      "body": "Accelerate issue detection, reduce alert fatigue, and establish clear SLOs to define success.",
       "media": []
     },
     {
       "id": "design",
       "label": "What I changed",
-      "body": "OpenTelemetry everywhere; Prometheus + Grafana dashboards; SLOs with clear runbooks; deploy hygiene.",
+      "body": "I drove a major reliability initiative by implementing OpenTelemetry for unified observability, building Prometheus and Grafana dashboards for real-time insights, establishing SLOs with runbooks for proactive response, and improving deployment hygiene to ensure safer, predictable releases.",
       "media": []
     },
     {
       "id": "results",
       "label": "Results",
-      "body": "p95 latency dropped; alert noise halved; MTTR improved while traffic still grew.",
+      "body": "We successfully reduced p95 latency for a faster user experience and cut alert noise in half. Most importantly, we improved our MTTR even as traffic continued to grow, demonstrating a more resilient and stable system.",
       "metrics": [
-        { "name": "p95 latency", "before": 420, "after": 270, "unit": "ms" },
-        { "name": "Alert noise", "before": 100, "after": 50, "unit": "%" },
-        { "name": "MTTR", "before": 1.0, "after": 0.55, "unit": "x" },
+        { "name": "p95 latency Optimization", "before": 420, "after": 270, "unit": "ms" },
+        { "name": "Alert noise Reduction", "before": 100, "after": 50, "unit": "%" },
+        { "name": "Mean Time to Resolution", "before": 1.0, "after": 0.55, "unit": "x" },
         { "name": "Traffic growth", "before": 0, "after": 25, "unit": "% QoQ" }
       ],
       "media": []
