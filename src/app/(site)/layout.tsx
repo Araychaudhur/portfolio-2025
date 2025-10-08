@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import CtaTracker from "@/components/CtaTracker";
 import dynamic from "next/dynamic";
 import IntroGate from "@/components/intro/IntroGate";
+import type { Metadata } from "next";
 
 // Load the floating Q&A launcher as a pure client island to avoid SSR mismatches.
 const RagSheet = dynamic(async () => {
@@ -14,6 +15,11 @@ const RagSheet = dynamic(async () => {
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+  process.env.SITE_URL?.replace(/\/+$/, "") ||
+  "http://localhost:3000";
+
 export const metadata = {
   title: {
     default: "Apoorva Ray Chaudhuri",
@@ -21,6 +27,7 @@ export const metadata = {
   },
   description:
     "Proof, not promises. Case studies with interactive walkthroughs and a Q&A bot that cites this site.",
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
